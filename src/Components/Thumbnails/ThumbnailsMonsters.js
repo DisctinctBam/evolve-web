@@ -18,6 +18,7 @@ import * as Context from '../../Context'
 const Container = styled.div`
     background: rgba(255, 0, 255, 0.5);
     height: 50%;
+    flex: .1;
 `
 
 //-------------------------------------------Thumbnails---------------------------------------
@@ -29,8 +30,8 @@ const MonsterAvailableContainer = styled.div`
 const MonsterContainer = styled.div`
     border: 1px solid black;
     margin: 1px;
-    height: 47px;
-    width: 64.03px;
+    height: 100%;
+    width: auto;
 `
 
 //Actual Thumbnail images
@@ -99,7 +100,7 @@ function MonsterAvailable () {
     )
 }
 
-export default function ThumbnailsHunters() {
+export default function ThumbnailsMonsters() {
     return (
         <Container>
             <MonsterAvailable />

@@ -7,6 +7,7 @@ const Container = styled.div`
     background: rgba(0, 255, 255, 0.5);
     height: 50%;
     grid-template-columns: 1fr 1fr;
+    flex: .6;
 `
 
 //-------------------------------------------Portrait---------------------------------------
