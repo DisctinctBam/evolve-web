@@ -5,7 +5,7 @@ const Container = styled.div`
     background-color: #8866aa;
 `
 
-export default function TrapperAssaultSelect() {
+export default function TrapperMedicSelect() {
     return (
         <TwoRoleSelect />
     )

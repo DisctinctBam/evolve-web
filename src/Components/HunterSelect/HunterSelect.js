@@ -1,16 +1,18 @@
 import styled from 'styled-components'
-import SupportMedicSelect from './SupportMedicSelect'
-import TrapperAssaultSelect from './TrapperAssaultSelect'
+import OnlySelect from './OnlySelect'
+import ThumbnailsHunters from '../Thumbnails/ThumbnailsHunters'
 
 const Container = styled.div`
-    background-color: #00aa00;
+    background-color: rgba(0, 0, 0, 0.0);
+    display: grid;
+    margin: 5px
 `
 
 export default function HunterSelect() {
     return (
         <Container>
-            <TrapperAssaultSelect />
-            <SupportMedicSelect />
+            <OnlySelect />
+            <ThumbnailsHunters />
         </Container>
     )
 }

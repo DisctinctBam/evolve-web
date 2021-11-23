@@ -1,35 +1,60 @@
 // This file is all the shared pieces between the Support+Medic selection and the Trapper+Assault selection phases
 import { useCallback, useContext } from 'react'
 import styled from 'styled-components'
-import GriffinThumbnail from '../../Images/Thumbnails/griffin.jpg'
-import GriffinPortrait from '../../Images/Portraits/griffin.png'
-
+import AssaultThumbnail from '../../Images/Other_Icons/Assault.jpg'
+import SupportThumbnail from '../../Images/Other_Icons/Support.jpg'
+import TrapperThumbnail from '../../Images/Other_Icons/Trapper.jpg'
+import MedicThumbnail from '../../Images/Other_Icons/Medic.jpg'
+import GriffinThumbnail from '../../Images/Thumbnails/09Griffin Profile Pic.png'
+import GriffinPortrait from '../../Images/Portraits/09Griffin_Portrait.png'
 import * as Context from '../../Context'
 
+//Container/wrapper for Class icons, Portraits, Thumbnails
 const Container = styled.div`
     background-color: inherit;
     flex-direction: column;
 `
 
+//-------------------------------------------Class Icons---------------------------------------
+//Wrapper for Class icons (headers)
 const IconContainer = styled.div`
-    background-color: #553388;
+    height: 40%;
+`
+
+//Containers for Class icons (headers)
+const IconContainerAssault = styled.div`
+    background-color: rgba(0, 0, 0, 0.0);
+    width: 50%;
+    background-image: url(${AssaultThumbnail});
+    background-size: cover;
+`
+
+const IconContainerSupport = styled.div`
+    background-color: rgba(0, 0, 0, 0.0);
+    width: 50%;
+    background-image: url(${SupportThumbnail});
+    background-size: cover;
+`
+
+//Actual Class images
+const ClassThumbnail = styled.img`
 `
 
 function Icons () {
     return (
-        <IconContainer>
-
-        </IconContainer>
+            <IconContainer>
+                <IconContainerAssault></IconContainerAssault>
+                <IconContainerSupport></IconContainerSupport>
+            </IconContainer>
     )
 }
 
+//-------------------------------------------Portraits---------------------------------------
+//Container for selected portrait
 const SelectedCharacterContainer = styled.div`
-    width: 45%;
 `
 
-const SelectedCharacterImage = styled.img`
-`
-
+//Portraitdata
 function SelectedCharacter({character}) {
     return (
         <SelectedCharacterContainer>
@@ -38,8 +63,15 @@ function SelectedCharacter({character}) {
     )
 }
 
+//Actual Portrait Images
+const SelectedCharacterImage = styled.img`
+    object-fit: cover;
+`
+
+//Container for Background behind Portraits
 const SelectionContainer = styled.div`
-    background-color: #1155aa;
+    background: rgba(255, 255, 255, 0.5);
+    height: 350px
 `
 
 function Selections () {
@@ -52,102 +84,11 @@ function Selections () {
     )
 }
 
-const CharacterContainer = styled.div`
-    border: 1px solid black;
-    margin: 2px;
-    width: 25%;
-    height: 25%;
-`
-
-const CharacterThumbnail = styled.img`
-    width: 100%;
-    height: 100%;
-`
-function Character({data}) {
-    const [gameState, setGameState] = useContext(Context.GameStateContext)
-    // TODO: check if he's banned
-    // TODO: check game state 
-    const selectCharacter = useCallback(() => {
-        // TODO: obviously, we just want to modify the state, not reset it completely
-        console.log("Selecting:", data)
-        setGameState(
-            {
-                selectedAssault: data
-            }
-        )
-    }, [data])
-    return (
-        <CharacterContainer onClick={selectCharacter}>
-            <CharacterThumbnail alt={data.name} src={data.thumbnail} />
-        </CharacterContainer>
-    )
-}
-
-const AvailableContainer = styled.div`
-    background-color: #88ee99;
-    flex-wrap: wrap;
-`
-
-function Available () {
-    // This should be somewhere else; possibly from server? could be here as well
-    const characters = [{
-        name: 'Griffin',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin2',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin3',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin2',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin3',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin2',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    },{
-        name: 'Griffin3',
-        role: 'Trapper',
-        thumbnail: GriffinThumbnail,
-        portrait: GriffinPortrait
-    }]
-    return (
-        <AvailableContainer>
-            {characters.map(c => <Character data={c} />)}
-        </AvailableContainer>
-    )
-}
 export default function TwoRoleSelect() {
     return (
         <Container>
             <Icons />
             <Selections />
-            <Available />
         </Container>        
     )
 }
