@@ -2,12 +2,11 @@ import { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import * as Context from '../../Context'
 
-//Container/wrapper for Portraits & Thumbnails
+//Container/wrapper for Portraits
 const Container = styled.div`
-    background: rgba(0, 255, 255, 0.5);
-    height: 50%;
+    background: rgba(255, 255, 255, 0.5);
     grid-template-columns: 1fr 1fr;
-    flex: .6;
+    flex: .7;
 `
 
 //-------------------------------------------Portrait---------------------------------------
@@ -30,7 +29,6 @@ function SelectedMonster({Monster}) {
 
 //Actual Portrait Images
 const SelectedMonsterImage = styled.img`
-    object-fit: cover;
 `
 
 function MonsterSelection () {

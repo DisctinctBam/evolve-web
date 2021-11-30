@@ -1,15 +1,10 @@
-// This file is all the shared pieces between the Support+Medic selection and the Trapper+Assault selection phases
 import { useCallback, useContext } from 'react'
 import styled from 'styled-components'
-import AssaultThumbnail from '../../Images/Other_Icons/Assault.jpg'
-import SupportThumbnail from '../../Images/Other_Icons/Support.jpg'
 import TrapperThumbnail from '../../Images/Other_Icons/Trapper.jpg'
 import MedicThumbnail from '../../Images/Other_Icons/Medic.jpg'
-import GriffinThumbnail from '../../Images/Thumbnails/09Griffin Profile Pic.png'
-import GriffinPortrait from '../../Images/Portraits/09Griffin_Portrait.png'
 import * as Context from '../../Context'
 
-//Container/wrapper for Class icons, Portraits, Thumbnails
+//Container/wrapper for Class icons, Portraits
 const Container = styled.div`
     background-color: inherit;
     flex-direction: column;
@@ -18,33 +13,32 @@ const Container = styled.div`
 //-------------------------------------------Class Icons---------------------------------------
 //Wrapper for Class icons (headers)
 const IconContainer = styled.div`
-    height: 40%;
+    flex: .2
 `
 
 //Containers for Class icons (headers)
-const IconContainerAssault = styled.div`
-    background-color: rgba(0, 0, 0, 0.0);
-    width: 50%;
-    background-image: url(${AssaultThumbnail});
-    background-size: cover;
+const IconContainerTrapper = styled.div`
 `
 
-const IconContainerSupport = styled.div`
-    background-color: rgba(0, 0, 0, 0.0);
-    width: 50%;
-    background-image: url(${SupportThumbnail});
-    background-size: cover;
+const IconContainerMedic = styled.div`
 `
 
 //Actual Class images
-const ClassThumbnail = styled.img`
+const MedicThumb = styled.img`
+`
+
+const TrapperThumb = styled.img`
 `
 
 function Icons () {
     return (
             <IconContainer>
-                <IconContainerAssault></IconContainerAssault>
-                <IconContainerSupport></IconContainerSupport>
+                <IconContainerTrapper>
+                    <TrapperThumb alt={"Trapper"} src={TrapperThumbnail} />
+                </IconContainerTrapper>
+                <IconContainerMedic>
+                    <MedicThumb alt={"Medic"} src={MedicThumbnail} />
+                </IconContainerMedic>
             </IconContainer>
     )
 }
@@ -71,20 +65,19 @@ const SelectedCharacterImage = styled.img`
 //Container for Background behind Portraits
 const SelectionContainer = styled.div`
     background: rgba(255, 255, 255, 0.5);
-    height: 350px
 `
 
 function Selections () {
     const [gameState, setGameState] = useContext(Context.GameStateContext)
     return (
         <SelectionContainer>
-            <SelectedCharacter character={gameState.selectedAssault} />
             <SelectedCharacter character={gameState.selectedTrapper} />
+            <SelectedCharacter character={gameState.selectedMedic} />
         </SelectionContainer>
     )
 }
 
-export default function TwoRoleSelect() {
+export default function TwoRoleSelectTrapperMedic() {
     return (
         <Container>
             <Icons />

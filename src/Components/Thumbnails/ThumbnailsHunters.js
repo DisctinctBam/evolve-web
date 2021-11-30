@@ -48,15 +48,12 @@ import SunnyThumbnail from '../../Images/Thumbnails/23Sunny Profile Pic.png'
 import SunnyPortrait from '../../Images/Portraits/23Sunny_Portrait.png'
 import KalaThumbnail from '../../Images/Thumbnails/24Kala Profile Pic.png'
 import KalaPortrait from '../../Images/Portraits/24Kala_Portrait.png'
-import TwoRoleSelect from '../HunterSelect/TwoRoleSelect'
-
 import * as Context from '../../Context'
 
 //Container/wrapper for Thumbnails
 const Container = styled.div`
     background-color: inherit;
-    height: 210px
-    padding: 10px
+    flex: .3
 `
 
 //Boxes for specific thumbnails
@@ -81,7 +78,10 @@ function Character({data}) {
         console.log("Selecting:", data)
         setGameState(
             {
-                selectedAssault: data
+                selectedAssault: data,
+                selectedSupport: data,
+                selectedTrapper: data,
+                selectedMedic: data
             }
         )
     }, [data])
@@ -94,7 +94,6 @@ function Character({data}) {
 
 //Container for Thumbnail containers
 const AvailableContainer = styled.div`
-    background: rgba(255, 255, 255, 0.5);
     flex-wrap: wrap;
 `
 

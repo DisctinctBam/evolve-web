@@ -16,8 +16,6 @@ import * as Context from '../../Context'
 
 //Container/wrapper for Thumbnails
 const Container = styled.div`
-    background: rgba(255, 0, 255, 0.5);
-    height: 50%;
     flex: .1;
 `
 
@@ -30,8 +28,8 @@ const MonsterAvailableContainer = styled.div`
 const MonsterContainer = styled.div`
     border: 1px solid black;
     margin: 1px;
-    height: 100%;
-    width: auto;
+    height: 47px;
+    width: 64.03px;
 `
 
 //Actual Thumbnail images

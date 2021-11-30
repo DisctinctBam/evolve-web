@@ -7,8 +7,7 @@ import MapOptions from './MapOptions'
 
 //Container/wrapper for Portraits & Thumbnails
 const Container = styled.div`
-    background-color: rgba(255, 255, 0, 0.5);
-    margin: 5px;
+    margin: 10px;
     flex-direction: column;
 `
 
@@ -18,7 +17,6 @@ export default function MonsterSelect() {
             <MonsterPortrait />
             <ThumbnailsMonsters />
             <MapOptions />
-            
         </Container>        
     )
 }

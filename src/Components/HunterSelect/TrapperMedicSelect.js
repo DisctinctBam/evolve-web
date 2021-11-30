@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import TwoRoleSelect from './TwoRoleSelect'
+import TwoRoleSelectTrapperMedic from './TwoRoleSelectTrapperMedic'
 
 const Container = styled.div`
-    background-color: #8866aa;
 `
 
 export default function TrapperMedicSelect() {
     return (
-        <TwoRoleSelect />
+        <TwoRoleSelectTrapperMedic />
     )
 }

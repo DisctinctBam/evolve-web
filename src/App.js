@@ -12,6 +12,7 @@ import Context from './Context'
 
 const MainDiv = styled.div`
   background-image: url("https://sm.ign.com/t/ign_ap/articlepage/e/evolve-dlc/evolve-dlc-adds-new-monster-and-hunters-this-month_r7tf.1280.jpg");
+  background-size: cover;
   height: 100vh;
   flex-direction: column;
 `
