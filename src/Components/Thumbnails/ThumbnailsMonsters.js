@@ -20,9 +20,6 @@ const Container = styled.div`
 `
 
 //-------------------------------------------Thumbnails---------------------------------------
-//Container for icon containers
-const MonsterAvailableContainer = styled.div`
-`
 
 //Boxes for specific thumbnails
 const MonsterContainer = styled.div`
@@ -42,14 +39,13 @@ function Monster({data}) {
     // TODO: check if he's banned
     // TODO: check game state 
     const selectMonster = useCallback(() => {
-        // TODO: obviously, we just want to modify the state, not reset it completely
-        console.log("Selecting:", data)
-        setGameState(
-            {
-                selectedMonster: data
-            }
-        )
-    }, [data])
+        if (!gameState.isMonsterBan && !gameState.isMonsterPick) {
+            return
+        }
+
+        gameState.makeSelection(data)
+        setGameState(gameState)
+    }, [data, gameState, setGameState])
     return (
         <MonsterContainer onClick={selectMonster}>
             <MonsterThumbnail alt={data.name} src={data.thumbnail} />
@@ -92,15 +88,23 @@ function MonsterAvailable () {
     }]
 
     return (
-        <MonsterAvailableContainer>
+        <>
             {Monsters.map(c => <Monster data={c} />)}
-        </MonsterAvailableContainer>
+        </>
     )
 }
 
 export default function ThumbnailsMonsters() {
+    const [gameState] = useContext(Context.GameStateContext)
+
+    const className = gameState.isMonsterBan 
+        ? 'blue-outline' 
+        : gameState.isMonsterPick
+        ? 'red-outline'
+        : undefined
+
     return (
-        <Container>
+        <Container className={className}>
             <MonsterAvailable />
         </Container>        
     )

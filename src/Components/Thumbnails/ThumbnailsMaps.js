@@ -26,6 +26,7 @@ import * as Context from '../../Context'
 
 //Container/wrapper for Thumbnails
 const Container = styled.div`
+    flex-wrap: wrap;
 `
 
 //Boxes for specific thumbnails
@@ -34,37 +35,36 @@ const MapContainer = styled.div`
     margin: 1px;
     height: 70px;
     width: 62.5px;
+    background: black;
 `
 
 //Actual Thumbnail images
-const MapThumbnail = styled.img`    
+const MapThumbnail = styled.img`
+    opacity: ${props => props.disabled ? '30%' : '100%' }    
 `
 
 //Click on Thumbnail -> Return Portrait
 function Map({data}) {
     const [gameState, setGameState] = useContext(Context.GameStateContext)
-    // TODO: check if he's banned
-    // TODO: check game state 
+    
     const selectMap = useCallback(() => {
-        // TODO: obviously, we just want to modify the state, not reset it completely
-        console.log("Selecting:", data)
-        setGameState(
-            {
-                selectedMap: data
-            }
-        )
-    }, [data])
+        if (!gameState.isMapSelect) {
+            return // not the right stage - don't allow map select
+        }
+
+        gameState.makeSelection(data)
+        setGameState(gameState)
+    }, [data, gameState, setGameState])
     return (
         <MapContainer onClick={selectMap}>
-            <MapThumbnail alt={data.name} src={data.thumbnail} />
+            <MapThumbnail 
+                alt={data.name} 
+                src={data.thumbnail} 
+                disabled={!gameState.isMapSelect && gameState.selectedMap.name !== data.name}
+            />
         </MapContainer>
     )
 }
-
-//Container for Thumbnail containers
-const MapAvailableContainer = styled.div`
-    flex-wrap: wrap;
-`
 
 function MapAvailable () {
     // This should be somewhere else; possibly from server? could be here as well
@@ -124,10 +124,12 @@ function MapAvailable () {
         thumbnail: Wraith_TrapThumbnail,
         portrait: Wraith_TrapMap
     }]
+
+   
     return (
-        <MapAvailableContainer>
+        <> {/* This is a way to group items in a component when you don't want a top level tag - removes unneeded container */}
             {Maps.map(c => <Map data={c} />)}
-        </MapAvailableContainer>
+        </>
     )
 }
 

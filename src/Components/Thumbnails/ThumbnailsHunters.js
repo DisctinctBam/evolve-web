@@ -62,32 +62,56 @@ const CharacterContainer = styled.div`
     margin: 1px;
     height: 47px;
     width: 64.03px;
+    background-color: black;
 `
 
 //Actual Thumbnail images
 const CharacterThumbnail = styled.img`    
+    opacity: ${props => props.disabled ? '30%' : '100%' }
 `
 
 //Click on Thumbnail -> Return Portrait
 function Character({data}) {
     const [gameState, setGameState] = useContext(Context.GameStateContext)
-    // TODO: check if he's banned
-    // TODO: check game state 
     const selectCharacter = useCallback(() => {
-        // TODO: obviously, we just want to modify the state, not reset it completely
-        console.log("Selecting:", data)
-        setGameState(
-            {
-                selectedAssault: data,
-                selectedSupport: data,
-                selectedTrapper: data,
-                selectedMedic: data
-            }
-        )
-    }, [data])
+        if (!gameState.isAssaultBan && !gameState.isAssaultPick && !gameState.isMedicBan && !gameState.isMedicPick) {
+            return // wrong state
+        }
+
+        /* TODO: don't update selection yet; instead, update gameState.workingData, and hook the setSelection call
+         up to a Submit button somewhere (or if time runs out, if selection is timed)
+         As it is, we can only select one thing, and the stage data wil have something like:
+         {
+            name: 'Torvald',
+            role: 'Assault',
+            thumbnail: TorvaldThumbnail,
+            portrait: TorvaldPortrait
+        }
+
+        what we should have instead is:
+        {
+            assault: {
+                name: 'Torvald',
+                role: 'Assault',
+                thumbnail: TorvaldThumbnail,
+                portrait: TorvaldPortrait
+            },
+            support: undefined
+        }
+        */
+
+        gameState.makeSelection(data)
+        setGameState(gameState)
+    }, [data, gameState, setGameState])
+
+    console.log(data, gameState, gameState.isAssaultPick)
+
+    const disabled = false
+
+    // TODO: logic for disabling, showing banned, etc
     return (
         <CharacterContainer onClick={selectCharacter}>
-            <CharacterThumbnail alt={data.name} src={data.thumbnail} />
+            <CharacterThumbnail alt={data.name} src={data.thumbnail}  disabled={disabled} />
         </CharacterContainer>
     )
 }
@@ -228,8 +252,15 @@ function Available () {
 }
 
 export default function ThumbnailsHunters() {
+    const [gameState] = useContext(Context.GameStateContext)
+
+    const className = (gameState.isAssaultBan || gameState.isMedicBan) 
+        ? 'red-outline' 
+        : (gameState.isAssaultPick || gameState.isMedicPick) 
+        ? 'blue-outline'
+        : undefined
     return (
-        <Container>
+        <Container className={className}>
             <Available />
         </Container>        
     )
